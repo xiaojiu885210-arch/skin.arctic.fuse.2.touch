@@ -1,4 +1,4 @@
-<addon id="skin.arctic.fuse.2" name="Arctic Fuse 2 Touch" provider-name="jurialmunkey" version="2.12.12.1">
+<addon id="skin.arctic.fuse.2" name="Arctic Fuse 2 Touch" provider-name="jurialmunkey" version="2.12.12.2">
     <requires>
         <import addon="xbmc.gui" version="5.17.0" />
         <import addon="script.skinvariables" version="2.1.28" />
@@ -31,6 +31,6 @@
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
         </assets>
-        <news>2.12.12.1 - Touch overlay: Estouchy control logic on Arctic Fuse 2 visuals. Optional hide in Skin Settings.</news>
+        <news>2.12.12.2 - OSD close (X) and tap-empty-to-dismiss actually receive touch. 2.12.12.1 - Touch overlay.</news>
     </extension>
 </addon>

@@ -134,46 +134,71 @@
         </control>
     </include>
 
-    <!-- OSD corners: Estouchy PlayerControlCommons Home + Close, AF2 circle language. -->
+    <!-- OSD: Estouchy-style dismiss. Icons use hitrect 0 so taps hit the button, not the image. -->
     <include name="Touch_OSD_Nav">
         <control type="group">
             <visible>!Skin.HasSetting(Touch.HideDock)</visible>
 
-            <control type="group">
-                <left>40</left>
-                <top>36</top>
-                <width>80</width>
-                <height>80</height>
-                <control type="button" id="8811">
-                    <include>Defs_OSD_Button</include>
-                    <onclick>Dialog.Close(all,true)</onclick>
-                    <onclick>ActivateWindow(Home)</onclick>
-                </control>
-                <include content="OSD_Button_Icon_Overlay">
-                    <param name="icon">special://skin/extras/icons/home.png</param>
-                    <param name="id">8811</param>
-                    <param name="groupid">8911</param>
-                    <param name="itemgap">80</param>
-                    <param name="icon_colordiffuse">panel_fg_70</param>
-                </include>
+            <!-- Tap empty video area to close OSD (behind the real controls). -->
+            <control type="button" id="8810">
+                <left>0</left>
+                <top>0</top>
+                <width>1920</width>
+                <height>1080</height>
+                <texturefocus />
+                <texturenofocus />
+                <onclick>Close</onclick>
+                <label />
+                <font />
             </control>
 
             <control type="group">
-                <right>40</right>
-                <top>36</top>
+                <left>28</left>
+                <top>24</top>
+                <width>80</width>
+                <height>80</height>
+                <control type="button" id="8811">
+                    <width>80</width>
+                    <height>80</height>
+                    <hitrect x="-28" y="-24" w="136" h="136" />
+                    <include>Texture_Circle_Highlight_Focus_V</include>
+                    <texturenofocus colordiffuse="00ffffff">common/circle.png</texturenofocus>
+                    <onclick>Dialog.Close(all,true)</onclick>
+                    <onclick>ActivateWindow(Home)</onclick>
+                    <label />
+                    <font />
+                </control>
+                <control type="image">
+                    <width>80</width>
+                    <height>80</height>
+                    <bordersize>16</bordersize>
+                    <texture colordiffuse="panel_fg_70">special://skin/extras/icons/home.png</texture>
+                    <hitrect x="0" y="0" w="0" h="0" />
+                </control>
+            </control>
+
+            <control type="group">
+                <right>28</right>
+                <top>24</top>
                 <width>80</width>
                 <height>80</height>
                 <control type="button" id="8812">
-                    <include>Defs_OSD_Button</include>
+                    <width>80</width>
+                    <height>80</height>
+                    <hitrect x="-28" y="-24" w="136" h="136" />
+                    <include>Texture_Circle_Highlight_Focus_V</include>
+                    <texturenofocus colordiffuse="00ffffff">common/circle.png</texturenofocus>
                     <onclick>Close</onclick>
+                    <label />
+                    <font />
                 </control>
-                <include content="OSD_Button_Icon_Overlay">
-                    <param name="icon">special://skin/extras/icons/xmark.png</param>
-                    <param name="id">8812</param>
-                    <param name="groupid">8912</param>
-                    <param name="itemgap">80</param>
-                    <param name="icon_colordiffuse">panel_fg_70</param>
-                </include>
+                <control type="image">
+                    <width>80</width>
+                    <height>80</height>
+                    <bordersize>16</bordersize>
+                    <texture colordiffuse="panel_fg_70">special://skin/extras/icons/xmark.png</texture>
+                    <hitrect x="0" y="0" w="0" h="0" />
+                </control>
             </control>
         </control>
     </include>
