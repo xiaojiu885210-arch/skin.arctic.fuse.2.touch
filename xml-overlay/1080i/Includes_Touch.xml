@@ -134,54 +134,40 @@
         </control>
     </include>
 
-    <!-- OSD corners: tappable X/Home. Icon images have hitrect 0 so they don't steal taps. -->
+    <!--
+        OSD Home / Close — Estouchy PlayerControlCommons pattern:
+        the icon IS the button texture (no overlay image stealing taps).
+        Close uses Back, same as Estouchy.
+    -->
     <include name="Touch_OSD_Nav">
         <control type="group">
             <visible>!Skin.HasSetting(Touch.HideDock)</visible>
 
-            <control type="group">
-                <left>28</left>
-                <top>24</top>
-                <width>80</width>
-                <height>80</height>
-                <control type="button" id="8811">
-                    <width>80</width>
-                    <height>80</height>
-                    <hitrect x="-28" y="-24" w="136" h="136" />
-                    <include>Texture_Circle_Highlight_Focus_V</include>
-                    <texturenofocus colordiffuse="00ffffff">common/circle.png</texturenofocus>
-                    <onclick>Dialog.Close(all,true)</onclick>
-                    <onclick>ActivateWindow(Home)</onclick>
-                </control>
-                <control type="image">
-                    <width>80</width>
-                    <height>80</height>
-                    <bordersize>16</bordersize>
-                    <texture colordiffuse="panel_fg_70">special://skin/extras/icons/home.png</texture>
-                    <hitrect x="0" y="0" w="0" h="0" />
-                </control>
+            <control type="button" id="8811">
+                <description>Touch OSD Home</description>
+                <left>16</left>
+                <top>12</top>
+                <width>96</width>
+                <height>96</height>
+                <font></font>
+                <label></label>
+                <texturenofocus colordiffuse="panel_fg_70">special://skin/extras/icons/home.png</texturenofocus>
+                <texturefocus colordiffuse="$VAR[ColorSelected]">special://skin/extras/icons/home.png</texturefocus>
+                <onclick>Dialog.Close(all,true)</onclick>
+                <onclick>ActivateWindow(Home)</onclick>
             </control>
 
-            <control type="group">
-                <right>28</right>
-                <top>24</top>
-                <width>80</width>
-                <height>80</height>
-                <control type="button" id="8812">
-                    <width>80</width>
-                    <height>80</height>
-                    <hitrect x="-28" y="-24" w="136" h="136" />
-                    <include>Texture_Circle_Highlight_Focus_V</include>
-                    <texturenofocus colordiffuse="00ffffff">common/circle.png</texturenofocus>
-                    <onclick>Close</onclick>
-                </control>
-                <control type="image">
-                    <width>80</width>
-                    <height>80</height>
-                    <bordersize>16</bordersize>
-                    <texture colordiffuse="panel_fg_70">special://skin/extras/icons/xmark.png</texture>
-                    <hitrect x="0" y="0" w="0" h="0" />
-                </control>
+            <control type="button" id="8812">
+                <description>Touch OSD Close</description>
+                <right>16</right>
+                <top>12</top>
+                <width>96</width>
+                <height>96</height>
+                <font></font>
+                <label></label>
+                <texturenofocus colordiffuse="panel_fg_70">special://skin/extras/icons/xmark.png</texturenofocus>
+                <texturefocus colordiffuse="$VAR[ColorSelected]">special://skin/extras/icons/xmark.png</texturefocus>
+                <onclick>Back</onclick>
             </control>
         </control>
     </include>
