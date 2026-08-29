@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+    <!--
+        Estouchy-style touch logic, drawn with Arctic Fuse 2 chrome.
+        Hidden entirely via Skin.HasSetting(Touch.HideDock) for remote-only use.
+        Does not replace AF2 layouts, widgets, colors, or OSD design.
+    -->
+
+    <include name="Touch_RemoteHitRect">
+        <include content="Object_HitRect" condition="Skin.HasSetting(Touch.HideDock)">
+            <param name="x">0</param>
+            <param name="y">0</param>
+            <param name="w">0</param>
+            <param name="h">0</param>
+        </include>
+    </include>
+
+    <include name="Touch_Dock_Button">
+        <param name="visible">true</param>
+        <param name="icon">special://skin/extras/icons/home.png</param>
+        <param name="onclick">noop</param>
+        <definition>
+            <control type="button" id="$PARAM[id]">
+                <include>Defs_OSD_Button</include>
+                <visible>$PARAM[visible]</visible>
+                <onclick>$PARAM[onclick]</onclick>
+                <onup>300</onup>
+                <ondown>50</ondown>
+            </control>
+            <include content="OSD_Button_Icon_Overlay">
+                <param name="icon">$PARAM[icon]</param>
+                <param name="id">$PARAM[id]</param>
+                <param name="groupid">$PARAM[groupid]</param>
+                <param name="itemgap">osd_itemgap</param>
+                <param name="icon_colordiffuse">main_fg_70</param>
+                <param name="visible">$PARAM[visible]</param>
+            </include>
+        </definition>
+    </include>
+
+    <!-- Bottom furniture slot: AF2 already leaves the center empty (path left, clock right). -->
+    <include name="Touch_Dock">
+        <control type="group">
+            <visible>!Skin.HasSetting(Touch.HideDock)</visible>
+            <visible>!Window.IsVisible(FullscreenVideo)</visible>
+            <visible>!Window.IsVisible(Visualisation)</visible>
+            <visible>!Window.IsVisible(slideshow)</visible>
+            <visible>!Window.IsVisible(VideoOSD)</visible>
+            <visible>!Window.IsVisible(MusicOSD)</visible>
+            <visible>!Window.IsVisible(GameOSD)</visible>
+            <visible>!$EXP[Exp_InfoDialogs]</visible>
+            <animation effect="fade" time="200">Visible</animation>
+            <animation effect="fade" time="200">Hidden</animation>
+
+            <control type="group">
+                <include>Dimension_Bottombar</include>
+                <control type="grouplist" id="8800">
+                    <orientation>horizontal</orientation>
+                    <align>center</align>
+                    <height>80</height>
+                    <width>640</width>
+                    <centerleft>50%</centerleft>
+                    <centertop>50%</centertop>
+                    <itemgap>osd_itemgap</itemgap>
+                    <onup>300</onup>
+                    <ondown>50</ondown>
+                    <onleft>8800</onleft>
+                    <onright>8800</onright>
+
+                    <!-- Back — Estouchy BottomMenu ParentDir / Back -->
+                    <include content="Touch_Dock_Button">
+                        <param name="id">8801</param>
+                        <param name="groupid">8901</param>
+                        <param name="icon">special://skin/extras/icons/chevron-left.png</param>
+                        <param name="onclick">Back</param>
+                        <param name="visible">!Window.IsVisible(Home)</param>
+                    </include>
+
+                    <!-- Home -->
+                    <include content="Touch_Dock_Button">
+                        <param name="id">8802</param>
+                        <param name="groupid">8902</param>
+                        <param name="icon">special://skin/extras/icons/home.png</param>
+                        <param name="onclick">ActivateWindow(Home)</param>
+                        <param name="visible">!Window.IsVisible(Home)</param>
+                    </include>
+
+                    <!-- Reveal AF2 side menu on Home (it is focus-gated for remotes). -->
+                    <include content="Touch_Dock_Button">
+                        <param name="id">8803</param>
+                        <param name="groupid">8903</param>
+                        <param name="icon">special://skin/extras/icons/sidemenu.png</param>
+                        <param name="onclick">SetFocus(300)</param>
+                        <param name="visible">Window.IsVisible(Home)</param>
+                    </include>
+
+                    <!-- Options / power tray (AF2 window 1170) -->
+                    <include content="Touch_Dock_Button">
+                        <param name="id">8804</param>
+                        <param name="groupid">8904</param>
+                        <param name="icon">special://skin/extras/icons/ellipsis.png</param>
+                        <param name="onclick">ActivateWindow(1170)</param>
+                        <param name="visible">true</param>
+                    </include>
+
+                    <!-- Search hub -->
+                    <include content="Touch_Dock_Button">
+                        <param name="id">8805</param>
+                        <param name="groupid">8905</param>
+                        <param name="icon">special://skin/extras/icons/magnifying-glass.png</param>
+                        <param name="onclick">ActivateWindow(1105)</param>
+                        <param name="visible">!Window.IsVisible(1105)</param>
+                    </include>
+
+                    <!-- View / sort — focuses AF2's own furniture instead of drawing a second bar -->
+                    <include content="Touch_Dock_Button">
+                        <param name="id">8806</param>
+                        <param name="groupid">8906</param>
+                        <param name="icon">special://skin/extras/icons/table.png</param>
+                        <param name="onclick">SetFocus(8000)</param>
+                        <param name="visible">Window.IsMedia + !Window.IsVisible(Home) + !Window.IsVisible(MyPlaylist.xml)</param>
+                    </include>
+
+                    <!-- Context menu -->
+                    <include content="Touch_Dock_Button">
+                        <param name="id">8807</param>
+                        <param name="groupid">8907</param>
+                        <param name="icon">special://skin/extras/icons/bars.png</param>
+                        <param name="onclick">Action(ContextMenu)</param>
+                        <param name="visible">!Window.IsVisible(Home) + !Window.IsVisible(settings) + !Window.IsVisible(skinsettings)</param>
+                    </include>
+                </control>
+            </control>
+        </control>
+    </include>
+
+    <!-- OSD corners: Estouchy PlayerControlCommons Home + Close, AF2 circle language. -->
+    <include name="Touch_OSD_Nav">
+        <control type="group">
+            <visible>!Skin.HasSetting(Touch.HideDock)</visible>
+
+            <control type="group">
+                <left>40</left>
+                <top>36</top>
+                <width>80</width>
+                <height>80</height>
+                <control type="button" id="8811">
+                    <include>Defs_OSD_Button</include>
+                    <onclick>Dialog.Close(all,true)</onclick>
+                    <onclick>ActivateWindow(Home)</onclick>
+                </control>
+                <include content="OSD_Button_Icon_Overlay">
+                    <param name="icon">special://skin/extras/icons/home.png</param>
+                    <param name="id">8811</param>
+                    <param name="groupid">8911</param>
+                    <param name="itemgap">80</param>
+                    <param name="icon_colordiffuse">panel_fg_70</param>
+                </include>
+            </control>
+
+            <control type="group">
+                <right>40</right>
+                <top>36</top>
+                <width>80</width>
+                <height>80</height>
+                <control type="button" id="8812">
+                    <include>Defs_OSD_Button</include>
+                    <onclick>Close</onclick>
+                </control>
+                <include content="OSD_Button_Icon_Overlay">
+                    <param name="icon">special://skin/extras/icons/xmark.png</param>
+                    <param name="id">8812</param>
+                    <param name="groupid">8912</param>
+                    <param name="itemgap">80</param>
+                    <param name="icon_colordiffuse">panel_fg_70</param>
+                </include>
+            </control>
+        </control>
+    </include>
+
+</includes>
