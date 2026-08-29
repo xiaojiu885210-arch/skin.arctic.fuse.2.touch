@@ -12,8 +12,8 @@ Arctic Fuse 2 的界面，叠一层适合手机 / 平板的触控。
 
 | 文件 | 用途 |
 | --- | --- |
-| `skin.arctic.fuse.2-2.12.12.touch.zip` | **完整安装包（约 64MB）**。Kodi → 插件 → 从 zip 文件安装。 |
-| `AF2-Touch-XML-overlay.zip` | 已经装了原版 AF2 时，只覆盖 XML（约 68KB）。不是完整皮肤，不能从 zip 安装。 |
+| `skin.arctic.fuse.2-2.12.12.touch.zip` | **唯一能在 Kodi 里从 zip 安装的包（约 64MB）。** |
+| `AF2-Touch-XML-overlay.zip` | 手工覆盖用的 XML。**不能从 zip 安装**，Kodi 会提示无法安装。 |
 
 ## 安装完整包
 
