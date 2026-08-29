@@ -134,23 +134,10 @@
         </control>
     </include>
 
-    <!-- OSD: Estouchy-style dismiss. Icons use hitrect 0 so taps hit the button, not the image. -->
+    <!-- OSD corners: tappable X/Home. Icon images have hitrect 0 so they don't steal taps. -->
     <include name="Touch_OSD_Nav">
         <control type="group">
             <visible>!Skin.HasSetting(Touch.HideDock)</visible>
-
-            <!-- Tap empty video area to close OSD (behind the real controls). -->
-            <control type="button" id="8810">
-                <left>0</left>
-                <top>0</top>
-                <width>1920</width>
-                <height>1080</height>
-                <texturefocus />
-                <texturenofocus />
-                <onclick>Close</onclick>
-                <label />
-                <font />
-            </control>
 
             <control type="group">
                 <left>28</left>
@@ -165,8 +152,6 @@
                     <texturenofocus colordiffuse="00ffffff">common/circle.png</texturenofocus>
                     <onclick>Dialog.Close(all,true)</onclick>
                     <onclick>ActivateWindow(Home)</onclick>
-                    <label />
-                    <font />
                 </control>
                 <control type="image">
                     <width>80</width>
@@ -189,8 +174,6 @@
                     <include>Texture_Circle_Highlight_Focus_V</include>
                     <texturenofocus colordiffuse="00ffffff">common/circle.png</texturenofocus>
                     <onclick>Close</onclick>
-                    <label />
-                    <font />
                 </control>
                 <control type="image">
                     <width>80</width>
